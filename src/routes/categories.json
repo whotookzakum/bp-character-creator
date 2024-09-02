@@ -1,0 +1,152 @@
+[
+    {
+        "name": "Body",
+        "sections": [
+            {
+                "name": "Skin Tone"
+            },
+            {
+                "name": "Size"
+            }
+        ]
+    },
+    {
+        "name": "Face",
+        "sections": [
+            {
+                "name": "Type",
+                "type": 0
+            },
+            {
+                "name": "Contour",
+                "type": 2
+            },
+            {
+                "name": "Eye Shape",
+                "type": 4
+            },
+            {
+                "name": "Iris",
+                "type": 5
+            },
+            {
+                "name": "Eyebrows",
+                "type": 3
+            },
+            {
+                "name": "Eyelashes",
+                "type": 20
+            },
+            {
+                "name": "Nose",
+                "type": 6
+            },
+            {
+                "name": "Mouth",
+                "type": 7
+            },
+            {
+                "name": "Teeth",
+                "type": 21
+            },
+            {
+                "name": "Beard",
+                "type": 8
+            },
+            {
+                "name": "Lips",
+                "type": 9
+            },
+            {
+                "name": "Features",
+                "type": 10
+            },
+            {
+                "name": "Face Paint",
+                "type": 11
+            }
+        ]
+    },
+    {
+        "name": "Hair",
+        "sections": [
+            {
+                "name": "Style",
+                "type": 1
+            },
+            {
+                "name": "Color"
+            },
+            {
+                "name": "Pattern",
+                "type": 22
+            }
+        ]
+    },
+    {
+        "name": "Outfit",
+        "sections": [
+            {
+                "name": "Hat",
+                "type": "hat"
+            },
+            {
+                "name": "Top",
+                "type": "bdu"
+            },
+            {
+                "name": "Gloves",
+                "type": "glv"
+            },
+            {
+                "name": "Bottoms",
+                "type": "bdl"
+            },
+            {
+                "name": "Shoes",
+                "type": "sho"
+            },
+            {
+                "name": "Underwear",
+                "type": "udw"
+            }
+        ]
+    },
+    {
+        "name": "Accessories",
+        "sections": [
+            {
+                "name": "Headwear",
+                "type": "acc_hdt"
+            },
+            {
+                "name": "Eyes",
+                "type": "acc_hdm"
+            },
+            {
+                "name": "Face",
+                "type": "acc_hdl"
+            },
+            {
+                "name": "Ears",
+                "type": "acc_hde"
+            },
+            {
+                "name": "Hands",
+                "type": "acc_fng"
+            },
+            {
+                "name": "Upper Back",
+                "type": "acc_bdb"
+            },
+            {
+                "name": "Lower Back",
+                "type": "acc_hpb"
+            }
+        ]
+    },
+    {
+        "name": "Pose",
+        "sections": []
+    }
+]
