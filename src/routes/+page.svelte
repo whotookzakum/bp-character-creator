@@ -3,15 +3,13 @@
     import Icon from "@iconify/svelte";
     import { isJapanese, toHiragana } from "wanakana";
     import Window from "../components/Window";
-    import categories from "../data/categories.json"
+    import { categories, categoryIndex, gender, query } from "../stores"
+    import { browser } from '$app/environment'
 
     export let data;
     const { entries } = data;
 
-    let selectedCategoryIndex = 1;
-    $: selectedCategory = categories[selectedCategoryIndex];
-    let selectedGenderIndex = 1;
-    let userSearch = "";
+    $: selectedCategory = $categories[$categoryIndex];
 
     function getFilteredOptionsForSection(type, gender, query) {
         return entries.filter((entry) => {
@@ -62,9 +60,12 @@
         return asset(iconKeyValuePairs[0][1]);
     }
 
-    function asset(id) {
-        return `https://raw.githubusercontent.com/whotookzakum/bpassets/webp${id}.webp`;
+    function asset(path) {
+        return `https://raw.githubusercontent.com/whotookzakum/bpassets/webp${path}`;
     }
+
+    // subscribe() isn't working so update the cached value here
+    $: if (browser) localStorage.setItem("categories", JSON.stringify($categories))
 </script>
 
 <img
@@ -84,20 +85,20 @@
                 type="text"
                 placeholder="Search"
                 class="bg-transparent focus:outline-none"
-                bind:value={userSearch}
+                bind:value={$query}
             />
         </label>
 
         <div class="flex ml-auto">
             <label
                 class="p-2 rounded-lg"
-                class:active={selectedGenderIndex === 0}
+                class:active={$gender === 0}
             >
                 <input
                     type="radio"
                     class="sr-only"
                     value={0}
-                    bind:group={selectedGenderIndex}
+                    bind:group={$gender}
                 />
                 <span class="sr-only">Male</span>
                 <Icon
@@ -107,13 +108,13 @@
             </label>
             <label
                 class="p-2 rounded-lg"
-                class:active={selectedGenderIndex === 1}
+                class:active={$gender === 1}
             >
                 <input
                     type="radio"
                     class="sr-only"
                     value={1}
-                    bind:group={selectedGenderIndex}
+                    bind:group={$gender}
                 />
                 <span class="sr-only">Female</span>
                 <Icon
@@ -126,17 +127,17 @@
 
     <Window.Menu>
         <ul>
-            {#each categories as category, index}
+            {#each $categories as category, index}
                 <li>
                     <label
                         class="flex px-4 py-2 font-semibold"
-                        class:active={selectedCategoryIndex === index}
+                        class:active={$categoryIndex === index}
                     >
                         <input
                             type="radio"
                             class="sr-only"
                             value={index}
-                            bind:group={selectedCategoryIndex}
+                            bind:group={$categoryIndex}
                         />
                         {category.name}
                     </label>
@@ -148,14 +149,14 @@
     <Window.Body>
         <h2 class="sr-only">{selectedCategory.name}</h2>
         {#each selectedCategory.sections as section, index}
-            {#if getFilteredOptionsForSection(section.type, selectedGenderIndex, userSearch).length > 0}
+            {#if getFilteredOptionsForSection(section.type, $gender, $query).length > 0}
                 <Window.Collapsible
                     title={section.name}
                     bind:checked={section.checked}
                 >
                     <ul class="flex flex-wrap p-2">
-                        {#each getFilteredOptionsForSection(section.type, selectedGenderIndex, userSearch) as entry (entry.id)}
-                            {#if getIcon(entry, selectedGenderIndex)}
+                        {#each getFilteredOptionsForSection(section.type, $gender, $query) as entry (entry.id)}
+                            {#if getIcon(entry, $gender)}
                                 <li>
                                     <label
                                         class="block p-2 rounded-lg"
@@ -171,7 +172,7 @@
                                         <img
                                             src={getIcon(
                                                 entry,
-                                                selectedGenderIndex,
+                                                $gender,
                                             )}
                                             alt="{section.name} {entry.id}"
                                             width="64"

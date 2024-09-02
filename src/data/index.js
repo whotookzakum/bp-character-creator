@@ -18,10 +18,10 @@ Object.entries(allIconsFiles)
                     assetPaths.forEach(path => {
                         if (path.endsWith("_F") || path.endsWith("_M")) {
                             const genderSuffix = path.split("_").pop()
-                            acc[rowId][`icon_${genderSuffix}`] = path
+                            acc[rowId][`icon_${genderSuffix}`] = path + ".webp"
                         }
                         else if (path.includes("/UI_Icon") && !path.includes("CostumeL")) {
-                            acc[rowId].icon = path
+                            acc[rowId].icon = path + ".webp"
                         }
                     })
 
