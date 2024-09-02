@@ -3,7 +3,7 @@
     import Icon from "@iconify/svelte";
     import { isJapanese, toHiragana } from "wanakana";
     import Window from "../components/Window";
-    import categories from "./categories.json"
+    import categories from "../data/categories.json"
 
     export let data;
     const { entries } = data;
